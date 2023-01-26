@@ -11,7 +11,17 @@ public class Main {
         boolean runProgram = true;
         String gameTitle = "Food Game";
         while (runProgram) {
+            // Initial Panel
+            JOptionPane.showMessageDialog(null, "Bem vindos ao Jogo Gourmet! \n" +
+                    " Vamos adivinhar do que você gosta", gameTitle, JOptionPane.PLAIN_MESSAGE);
 
+            // Food Genre Panels
+            int test = JOptionPane.showConfirmDialog(null, "Você gosta de massa?", gameTitle, JOptionPane.YES_NO_OPTION);
+
+            if (test == JOptionPane.YES_OPTION) {
+                // TODO go to foodDish option
+            }
+            System.out.println(test);
             runProgram = false;
         }
     }

@@ -1,37 +1,46 @@
 import javax.swing.*;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
         FoodGenre foodGenre = new FoodGenre();
+        FoodDish foodDish = new FoodDish(new HashMap<>());
         String gameTitle = "Food Game";
         boolean runProgram = true;
 
-        while (runProgram) {
+        do {
             // Initial Panel
             ProgramFactory.welcomeMessage();
 
             // Food Genre Panels
-            int selectedFoodGenre;
-            for (int i = 0; i < foodGenre.getFoodGenres().size(); i++) {
-                selectedFoodGenre = ProgramFactory.makeQuestion(String.format("Você gosta de %s ?", foodGenre));
+            String whichFoodGenre = foodGenre.selectFoodGenre();
 
-                if (selectedFoodGenre == JOptionPane.NO_OPTION) continue;
-
-                if (selectedFoodGenre == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, String.format("Você gosta de %s!\n" +
-                            "Acertei", foodGenre.getFoodGenres().get(i)), "title", JOptionPane.PLAIN_MESSAGE);
-                    break;
-                }
+            // User doesn't like genre add new genre
+            if (whichFoodGenre.isEmpty()) {
+                String foodUserLike = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
+                foodGenre.addFood(foodUserLike);
+                foodGenre.selectFoodGenre();
             }
-            int playAgain = JOptionPane.showConfirmDialog(null, "Não descobrimos do que você gosta. \n" +
+
+            if (!whichFoodGenre.isEmpty()) {
+                String whichFoodDish = foodDish.selectFoodDish(whichFoodGenre);
+                if(whichFoodDish.isEmpty()) {
+                String newFoodDish = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
+                    foodDish.addDish(whichFoodGenre, newFoodDish);
+                    foodGenre.selectFoodGenre();
+                }
+                JOptionPane.showMessageDialog(null, String.format("Você gosta de %s!\n" +
+                        "Acertei", whichFoodDish), "title", JOptionPane.PLAIN_MESSAGE);
+            }
+
+            int playAgain = JOptionPane.showConfirmDialog(null,
                     "Quer jogar de novo?", gameTitle, JOptionPane.YES_NO_OPTION);
 
             if (playAgain == JOptionPane.NO_OPTION) runProgram = false;
 
-        }
+        } while (runProgram);
 
     }
-
 
 
 }

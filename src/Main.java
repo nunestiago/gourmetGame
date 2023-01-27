@@ -35,7 +35,7 @@ public class Main {
                 }
                 // User chose a dish
                 JOptionPane.showMessageDialog(null, String.format("Você gosta de %s!\n" +
-                        "Acertei", chosenFood), "title", JOptionPane.PLAIN_MESSAGE);
+                        "Acertei de novo!", chosenFood), "title", JOptionPane.PLAIN_MESSAGE);
             }
 
             int playAgain = JOptionPane.showConfirmDialog(null,

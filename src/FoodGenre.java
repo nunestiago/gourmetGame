@@ -28,7 +28,7 @@ public class FoodGenre {
             loopFoodGenre = this.getFoodGenres().get(i);
 
             int selectedFoodGenre = ProgramFactory
-                    .makeYesNoQuestion(String.format("Você gosta de %s ?", loopFoodGenre));
+                    .makeYesNoQuestion(String.format("O prato que você pensou é %s ?", loopFoodGenre));
 
             if (selectedFoodGenre == JOptionPane.YES_OPTION) {
                 return loopFoodGenre;

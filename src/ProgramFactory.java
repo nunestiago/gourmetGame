@@ -4,7 +4,7 @@ public class ProgramFactory {
     private static final String GAMETITLE = "Food Game";
 
     public static void welcomeMessage() {
-        JOptionPane.showMessageDialog(null, "Bem vindos ao Jogo Gourmet! \n" + " Vamos adivinhar do que você gosta",
+        JOptionPane.showMessageDialog(null, "Pense em um prato que gosta",
                 GAMETITLE, JOptionPane.PLAIN_MESSAGE);
     }
 
@@ -17,7 +17,7 @@ public class ProgramFactory {
     }
 
     public static void addNewFoodAndRestart(FoodGenre foodGenre, FoodDish foodDish) {
-        String newFoodDish = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
+        String newFoodDish = ProgramFactory.makeInputQuestion("Qual prato você pensou?");
         String newFoodGenre = ProgramFactory.makeInputQuestion(String
                 .format("%s é ______, mas Bolo de Chocolate não?", newFoodDish));
         foodGenre.addFood(newFoodGenre);

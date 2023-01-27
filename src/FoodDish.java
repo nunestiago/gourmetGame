@@ -9,8 +9,7 @@ public class FoodDish extends FoodGenre {
     public FoodDish(HashMap<String, List<String>> foodDish) {
         foodDish.put("Massa", new ArrayList<>(){
             {
-                add("Spaghetti");
-                add("Lasagna");
+                add("Lasanha");
             }
         });
         foodDish.put("Oriental", new ArrayList<>(){
@@ -30,7 +29,7 @@ public class FoodDish extends FoodGenre {
     public String selectFoodDish(String isFoodGenre) {
         String selectedFoodDish = "";
         for (String dish : this.foodDish.get(isFoodGenre)) {
-            int selectedFoodGenre = ProgramFactory.makeYesNoQuestion(String.format("Você gosta de %s ?", dish));
+            int selectedFoodGenre = ProgramFactory.makeYesNoQuestion(String.format("O prato que você pensou é %s ?", dish));
             if (selectedFoodGenre == JOptionPane.YES_OPTION) {
                 return dish;
             }

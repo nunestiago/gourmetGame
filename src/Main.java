@@ -12,12 +12,12 @@ public class Main {
             // Initial Panel
             ProgramFactory.welcomeMessage();
 
-            // Food Genre Panels
+            // Food Genre Panels - 1
             String whichFoodGenre = foodGenre.selectFoodGenre();
 
             // User doesn't like genre add new genre
             if (whichFoodGenre.isEmpty()) {
-                String foodUserLike = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
+                String foodUserLike = ProgramFactory.makeInputQuestion("Qual prato você pensou?");
                 foodGenre.addFood(foodUserLike);
                 foodGenre.selectFoodGenre();
             }
@@ -25,8 +25,10 @@ public class Main {
             if (!whichFoodGenre.isEmpty()) {
                 String whichFoodDish = foodDish.selectFoodDish(whichFoodGenre);
                 if(whichFoodDish.isEmpty()) {
-                String newFoodDish = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
-                    foodDish.addDish(whichFoodGenre, newFoodDish);
+                    String newFoodDish = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
+                    String newFoodGenre = ProgramFactory.makeInputQuestion(String
+                            .format("%s tipo de comida você gosta?", newFoodDish));
+                    foodDish.addDish(newFoodGenre, newFoodDish);
                     foodGenre.selectFoodGenre();
                 }
                 JOptionPane.showMessageDialog(null, String.format("Você gosta de %s!\n" +

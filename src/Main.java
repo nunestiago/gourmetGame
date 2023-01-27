@@ -13,36 +13,37 @@ public class Main {
             ProgramFactory.welcomeMessage();
 
             // Food Genre Panels - 1
-            String whichFoodGenre = foodGenre.selectFoodGenre();
+            String chosenFood;
+            chosenFood = foodGenre.selectFoodGenre();
 
             // User doesn't like genre add new genre
-            if (whichFoodGenre.isEmpty()) {
-                String foodUserLike = ProgramFactory.makeInputQuestion("Qual prato você pensou?");
-                foodGenre.addFood(foodUserLike);
-                foodGenre.selectFoodGenre();
+            if (chosenFood.isEmpty()) {
+                // The cake is a lie
+                if (ProgramFactory.isUserLikeCake()) break;
+                ProgramFactory.addNewFoodAndRestart(foodGenre, foodDish);
             }
 
-            if (!whichFoodGenre.isEmpty()) {
-                String whichFoodDish = foodDish.selectFoodDish(whichFoodGenre);
-                if(whichFoodDish.isEmpty()) {
-                    String newFoodDish = ProgramFactory.makeInputQuestion("Que tipo de comida você gosta?");
-                    String newFoodGenre = ProgramFactory.makeInputQuestion(String
-                            .format("%s tipo de comida você gosta?", newFoodDish));
-                    foodDish.addDish(newFoodGenre, newFoodDish);
-                    foodGenre.selectFoodGenre();
+            // User choose a genre and now a dish
+            if (!chosenFood.isEmpty()) {
+                chosenFood = foodDish.selectFoodDish(chosenFood);
+                // User didn't chose any dish
+                if (chosenFood.isEmpty()) {
+                    // Offer cake
+                    if (ProgramFactory.isUserLikeCake()) break;
+                    // The cake was a lie
+                    ProgramFactory.addNewFoodAndRestart(foodGenre, foodDish);
                 }
+                // User chose a dish
                 JOptionPane.showMessageDialog(null, String.format("Você gosta de %s!\n" +
-                        "Acertei", whichFoodDish), "title", JOptionPane.PLAIN_MESSAGE);
+                        "Acertei", chosenFood), "title", JOptionPane.PLAIN_MESSAGE);
             }
 
             int playAgain = JOptionPane.showConfirmDialog(null,
                     "Quer jogar de novo?", gameTitle, JOptionPane.YES_NO_OPTION);
 
-            if (playAgain == JOptionPane.NO_OPTION) runProgram = false;
+            if (playAgain == JOptionPane.NO_OPTION)
+                runProgram = false;
 
         } while (runProgram);
-
     }
-
-
 }
